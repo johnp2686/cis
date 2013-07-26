@@ -1,0 +1,22 @@
+<% if @questions %>
+
+<h1> Conversations between </h1>
+<table class="inner-table">
+  <tr>
+    <th> Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @questions.each do |q| %>
+  <tr>
+    <td><%= q.description %></td>
+    <td><%= link_to "view full", view_full_messages_admin_path(:id => q.id) %></td>
+    <td><%= link_to "Reply", add_answer_user_path(:id => q.id) %></td>
+  </tr>
+  <% end %>
+
+</table>
+<% else %>
+<h1> No conversations found </h1>
+
+<% end %>

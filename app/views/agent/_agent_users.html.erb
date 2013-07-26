@@ -1,0 +1,60 @@
+
+<% if @users.empty? %>
+  <diV class="inner-table">
+    <h3>Currently You Dont have  Customers </h3>
+  </div>
+
+<% else %>
+
+  <h3 class="my_dt">All Customers </h3>
+  <% if flash[:success] %>
+    <font color="green">
+      <%= flash[:success] %><% flash.clear %>
+    </font>
+  <% end %>
+  <table class="inner-table">
+    <tr>
+      <th> 
+        <%= sortable_column "First Name",:column => "first_name" %> 
+      </th>
+      <th> 
+        <%= sortable_column "Last Name", :column => "last_name" %> 
+      </th>
+      <th> 
+        <%= sortable_column "Email", :column => "email" %> 
+      </th>
+      <th> 
+        <%= sortable_column "Mobile Number", :column => "mobile" %> 
+      </th>
+      <th> 
+        <%= sortable_column "Location", :column => "location" %> 
+      </th>
+      <th> 
+        <%= sortable_column "Claims", :column => "policy_number" %> 
+      </th>
+      <th> 
+        <%= sortable_column "Send Status", :column => "send_status" %> 
+      </th>
+      <th></th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.location %></td>
+        <% if user.claims.size == 0 %>
+          <td><%= link_to "create claim", agent_add_claim_path(:id => user.id) %></td>
+        <% else %>
+          <td><% user.claims.each do |a|  %>
+            <%=  link_to a.id, claim_path(:id => a.id )  %>
+            <% end %><%#= user.claims.map(&:id) %></td>
+        <% end %>
+        <td><%= link_to "Send Mail", add_send_status_path(:id => user.id) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+

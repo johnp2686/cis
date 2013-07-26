@@ -1,0 +1,71 @@
+<div class="filiter"><strong>Filter By</strong></div>
+    <%= form_tag(view_agents_admin_index_path , :id => 'search_form',:method => :get )   do %>
+      <% params[:search]||= {} %>
+      <% params[:reset]||= {} %>
+      
+      
+      <%= collection_select :search,:user_name, @search_agents, :id, :user_name, {:selected => @user_name, :include_blank => '<Select User Name>'}%>
+
+      <%= collection_select :search,:email, @search_agents, :id, :email, {:selected => @email, :include_blank => '<Select Email>'}%>
+
+        <div class="fil_butns">
+            <%= submit_tag("Search", :class=> "search_btn") %>
+            <%= submit_tag("Reset", :class=> "reset_btn",:name => 'reset', :value => 'reset') %>
+        </div>
+      
+    <% end %>
+
+
+<h3>Agents Details </h3>
+<div style = "float:right;"><%= link_to "Create New Agent", create_agent_admin_index_path %></div>
+<% if !@agents.blank? %>
+<% if flash[:success] %>
+  <div class="success">
+    <%= flash[:success] %><% flash.clear %>
+  </div>
+<% end %>
+
+<table class="inner-table">
+  <tr>
+    <th> 
+      Username <% if @sort == "up" %><%= link_to (image_tag "desc.jpeg") ,{:action => 'sort', :sort =>"down",:method => "view_agents", :field => "user_name"} %><%  else %><%=link_to (image_tag "asc.jpeg") ,{:action => 'sort', :sort =>"up",:method => "view_agents",:field => "user_name"} %><% end %>
+    </th>
+    <th> 
+      First Name <% if @sort == "up" %><%= link_to (image_tag "desc.jpeg") ,{:action => 'sort', :sort =>"down",:method => "view_agents",:field => "first_name"} %><%  else %><%=link_to (image_tag "asc.jpeg") ,{:action => 'sort', :sort =>"up",:method => "view_agents",:field => "first_name"} %><% end %>
+    </th>
+    <th> 
+      Last Name <% if @sort == "up" %><%= link_to (image_tag "desc.jpeg") ,{:action => 'sort', :sort =>"down",:method => "view_agents",:field => "last_name"} %><%  else %><%=link_to (image_tag "asc.jpeg") ,{:action => 'sort', :sort =>"up",:method => "view_agents", :field => "last_name"} %><% end %>
+    </th>
+    <th> 
+      Email <% if @sort == "up" %><%= link_to (image_tag "desc.jpeg") ,{:action => 'sort',:sort =>"down",:method => "view_agents", :field => "email"} %><%  else %><%=link_to (image_tag "asc.jpeg") ,{:action => 'sort', :sort =>"up",:method => "view_agents",:field => "email"} %><% end %>
+    </th>
+    <th> 
+      Mobile <% if @sort == "up" %><%= link_to (image_tag "desc.jpeg") ,{:action => 'sort', :sort =>"down", :method => "view_agents", :field => "mobile"} %><%  else %><%=link_to (image_tag "asc.jpeg") ,{:action => 'sort', :sort =>"up",:method => "view_agents",:field => "mobile"} %><% end %>
+    </th>
+    <th> 
+      View Details 
+    </th>
+
+  </tr>
+  <% @agents.each do |agent| %>
+    <tr>
+      <td><%= agent.user_name %></td>
+      <td><%= agent.first_name %></td>
+      <td><%= agent.last_name %></td>
+      <td><%= agent.email %></td>
+      <td><%= agent.mobile %></td>
+      <td>
+        <%= link_to image_tag('view_detail.png'),view_agent_details_admin_path(agent) %>
+      </td>
+    </tr>  
+    
+  <% end %>
+  </table>
+  <div class="pagination" style="clear: both; margin: 10px 0px 0px; float: right;"><%= will_paginate @agents %></div>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+
+
+
+

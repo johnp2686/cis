@@ -1,0 +1,35 @@
+<h3 style="float:left; margin:0">Agents</h3>
+<% if !@agents.blank? %>
+<table class="inner-table">
+  <tr>
+    
+    <th> First Name</th>
+    <th> Last Name </th>
+    <th> Email </th>
+    <th> Mobile </th>
+    <th> Location </th>
+    
+
+  </tr>
+  <% @agents.each do |agent| %>
+    <tr>
+      <td><%= agent.first_name %></td>
+      <td><%= agent.last_name %></td>
+      <td><%= agent.email %></td>
+      <td><%= agent.mobile %></td>
+      <td><%= agent.location %></td>
+      
+    </tr>  
+    
+  <% end %>
+  </table>
+  <div class="pagination" style="clear: both; margin: 10px 0px 0px; float: right;"><%= will_paginate @agents %></div>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+
+
+
+
+
+

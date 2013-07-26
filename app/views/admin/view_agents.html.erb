@@ -1,0 +1,95 @@
+<div class='success_agent'>
+</div>
+<div class="filiter"><strong>Filter By</strong></div>
+    <%= form_tag(view_agents_admin_index_path , :id => 'search_form',:method => :get )   do %>
+      <% params[:search]||= {} %>
+      <% params[:reset]||= {} %>
+      
+      
+      <%= collection_select :search,:user_name, @search_agents, :id, :user_name, {:selected => @user_name, :include_blank => '<Select User Name>'}%>
+
+      <%= collection_select :search,:email, @search_agents, :id, :email, {:selected => @email, :include_blank => '<Select Email>'}%>
+
+        <div class="fil_butns">
+            <%= submit_tag("Search", :class=> "search_btn") %>
+            <%= submit_tag("Reset", :class=> "reset_btn",:name => 'reset', :value => 'reset') %>
+        </div>
+      
+    <% end %>
+
+
+<div class="create_agent"><%#= link_to "Create New Agent", create_agent_admin_index_path %> <input type="submit" value="add agent" id="add-agent-btn" /></div>
+
+<!-- Adding new Agent -->
+
+<div id="add-new-agent" class="new-agent">
+  <%= form_tag('/posts', :id=> "new-agent-form" ) do -%>
+ <table>
+    <tbody>
+    <tr id="agent-emp-id">
+      <td><label>Employee Id</label></td>
+      <td><input type="text" size="30" name="user[emp_id]"></td>
+    </tr>
+   
+    <tr id="agent-first-name">
+      <td><label>First Name</label></td>
+      <td><input type="text" size="30" name="user[first_name]" ></td>
+    </tr>
+    <tr id="agent-last-name">
+      <td><label>Last Name</label></td>
+      <td><input type="text" size="30" name="user[last_name]" ></td>
+    </tr>
+    <tr id="agent-email">
+      <td><label>Email</label></td>
+      <td><input type="text" size="30" name="user[email]" ></td>
+    </tr>
+    <tr id="agent-user-name">
+      <td><label>User Name</label></td>
+      <td><input type="text" size="30" name="user[user_name]" ></td>
+    </tr>
+    <tr>
+      <td><label>Date Of Birth</label></td>
+      <td id="agent-dob">
+        <input type="text" size="30" name="user[dob]" id="datepicker-dob" class="datepicker-dob" >
+      </td>
+    </tr>
+    <tr id="agent-mobile">
+      <td><label>Mobile</label></td>
+      <td><input type="text" size="30" name="user[mobile]"></td>
+    </tr>
+    <tr>
+      <td><label>Gender</label></td>
+      <td class="radio_tr">
+        <input type="radio" value="Male" name="user[gender]" checked="checked" /><label>Male
+      </label>
+        <input type="radio" value="Female" name="user[gender]" /><label >Female</label>
+      </td>
+    </tr>
+    <tr id="agent-location">
+      <td><label>Location</label></td>
+      <td><input type="text" size="30" name="user[location]" ></td>
+    </tr>
+    <tr id="agent-zip">
+      <td ><label>Zip Code</label></td>
+      <td><input type="text" size="30" name="user[zip]"></td>
+    </tr>
+    <tr id="agent-address">
+      <td><label class="address">Address</label></td>
+      <td><textarea rows="5" name="user[address]" cols="43" ></textarea></td>
+    </tr>
+  </tbody></table>
+<%= submit_tag "submit", :id=> "create-agent", :class => "create_b" %>
+
+<% end %>
+<%= button_tag "cancel", :class=>"close-agent-form" %>
+</div>
+</div><br /> 
+<div class="new-agent-errors">
+
+</div>
+<!--  -->
+
+<div id="agents"><%= render 'agents' %></div>
+</div>
+
+

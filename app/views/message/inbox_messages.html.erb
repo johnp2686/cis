@@ -1,0 +1,26 @@
+<div class="sentstatus_info">
+    <table class="inner-table">
+      <tr>
+        <th>From</th>
+        <th class="subject_header">Subject</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+    <% @messages.each do |mes| %>
+      <tr class="tr_messages">
+      <td><b><%= mes.from %></b></td>
+      <td><b><%= mes.subject %></b></td>
+      <td><b><%= time_and_day(mes.created_at) %></b></td>
+      <td></b><b><%= link_to "Read Full..", message_agent_customer_message_path(:id => mes.id) %></b></td>
+    </tr>
+    <% end %>
+     <% @viewed.each do |mes| %>
+    <tr class="tr_messages">
+      <td><%= mes.from %></td>
+      <td><%= mes.subject %></td>
+      <td><%= time_and_day(mes.created_at) %></td>
+      <td><%= link_to "Read Full..", message_agent_customer_message_path(:id => mes.id) %></td>
+    </tr>
+     <% end %>
+  </table>
+  </div>

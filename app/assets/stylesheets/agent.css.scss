@@ -1,0 +1,65 @@
+// Place all the styles related to the Agent controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.claim_damge_details {
+    background: none repeat scroll 0 0 #F4F4F4;
+    float: left;
+    width: 100%;
+}
+
+.claim_damge_details h2 {
+    background: none repeat scroll 0 0 #2E4266;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 16px !important;
+    padding: 3px 5px !important;
+}
+
+.claim_damge_details span {
+    float: left;
+    margin: 0;
+    min-width: 150px;
+    padding: 0 0 0 7px;
+}
+
+.claim_damge_details span {
+    float: left;
+    margin: 0;
+    min-width: 150px;
+}
+.claim_damge_details input[type="text"] {
+    width: 720px;
+}
+h1.h1_size{
+    font-size:20px !important;
+    float:left;
+    width:100%;
+    border-bottom:#ddd 1px solid;
+}
+.message_div .from_massage{
+    color:#222;
+    font-weight:bold;
+}
+.message_div .left{
+    float:left;
+}
+.message_div .time_message{
+    float:right;
+}
+.message_div .message_meassage{
+    float:left;
+    width:100%;
+    padding-top:20px;
+}
+.message_div{
+    min-height:300px;
+}
+.message_btm{
+    float:left;
+    clear:both;
+    width:860px;
+    border:#ddd 1px solid;
+    min-height:50px;
+    padding:15px;
+}

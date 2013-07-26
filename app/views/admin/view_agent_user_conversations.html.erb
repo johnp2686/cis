@@ -1,0 +1,24 @@
+
+
+<h3> Agent User Conversations </h3>
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>
+
+  User Name : <%= @user.user_name %></br>
+  Policy Number:
+  <% @user.claims.each do |claim| %>
+    <%= claim.policy_number %>
+  <% end %>
+  <% agent_name(@user.agent_id) %>
+  Agent Name: <%= @agent.user_name %>
+      
+  
+
+
+
+<br />
+<br />
+

@@ -1,0 +1,79 @@
+
+<div  class="tabel_bg">
+  <table   border="0" cellpadding="10" cellspacing="0" id="box-table-b" class="add_emp">
+    
+    <% if flash[:error] %>
+      <font color="red">
+        <%= flash[:error] %><% flash.clear %>
+      </font>
+    <% end %>
+    <h2>  user Details </h2>
+    <tr>
+      <td width="160">First Name</td>
+      <td><%= @user.first_name %></td>
+    </tr>
+    <tr>
+      <td width="160">Last Name</td>
+      <td><%= @user.last_name %></td>
+    </tr>
+    <tr>
+      <td width="160">Email</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td width="160">Mobile</td>
+      <td><%= @user.mobile %></td>
+    </tr>
+    <tr>
+      <td width="160">Gender</td>
+      <td><%= @user.gender %></td>
+    </tr>
+    <tr>
+      <td width="160">Location</td>
+      <td><%= @user.location %></td>
+    </tr>
+    <tr>
+      <td width="160">Completed at</td>
+      <td><%= @user.completed_at %></td>
+    </tr>
+    <tr>
+      <td width="160">Completed By</td>
+      <td><%= @agent.user_name %></td>
+    </tr>
+
+
+    <tr><td> <h6>Claim Details </h6> </td></tr>
+
+    <% if !@claims.blank? %> 
+      <% @claims.each do |claim| %>
+        <tr>
+          <td width="160">Policy Number</td>
+          <td><%= claim.policy_number %></td>
+        </tr>
+
+        <tr>
+          <td width="160">Date of Loss</td>
+          <td><%= claim.date_of_loss %></td>
+        </tr>
+
+        <tr>
+          <td width="160">Location of Loss</td>
+          <td><%= claim.location_of_loss %></td>
+        </tr>
+
+        <tr>
+          <td width="160">Damage Details</td>
+          <td><%= claim.damage_details %></td>
+        </tr>
+        <tr>
+          <td width="160">Claim Description</td>
+          <td><%= claim.claim_description %></td>
+        </tr>
+        
+      <% end %>
+    <% end %>
+    
+  </table>
+  <%= link_to "Back",request.referrer %>
+</div>
+

@@ -1,0 +1,62 @@
+
+<div  class="tabel_bg">
+  <table   border="0" cellpadding="10" cellspacing="0" id="box-table-b" class="add_emp">
+    
+    <% if flash[:error] %>
+      <font color="red">
+        <%= flash[:error] %><% flash.clear %>
+      </font>
+    
+    <% end %>
+    <tr>
+      <td width="160">First Name</td>
+      <td><%= @user.first_name %></td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td><%= @user.last_name %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>Mobile Number</td>
+      <td><%= @user.mobile %></td>
+    </tr>
+    <tr>
+      <td>Date Of Birth</td>
+      <td><%= @user.dob %></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td><%= @user.gender %></td>
+    </tr>
+    <tr>
+      <td>Photo</td>
+      <td><%= image_tag @user.image_url(:thumb) if @user.image? %></td>
+    </tr>
+    
+    <tr>
+      <td>Location</td>
+      <td><%= @user.location %></td>
+    </tr>
+    <tr>
+      <td>Zip Code</td>
+      <td><%= @user.zip %></td>
+    </tr>
+    <tr>
+      <td>Policy Number</td>
+      <td><%= @user.policy_number %></td>
+    </tr>
+    <tr>
+      <td>Damage Details</td>
+      <td><%= @user.damage_details %></td>
+    </tr>
+    <%#= form_tag(:controller=>"admin",:action=>"view_user_details")   do %>
+
+    
+    
+  </table>
+</div>
+

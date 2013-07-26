@@ -1,0 +1,105 @@
+<div  class="tabel_bg">
+  <table   border="0" cellpadding="10" cellspacing="0" id="box-table-b" class="add_emp">
+    
+    <% if flash[:error] %>
+      <font color="red">
+        <%= flash[:error] %><% flash.clear %>
+      </font>
+    
+    <% end %>
+    <h2> Agent Details </h2>
+    <tr>
+      <td width="160">Employee Id</td>
+      <td><%= @agent.emp_id %></td>
+    </tr>
+    <tr>
+      <td width="160">First Name</td>
+      <td><%= @agent.first_name %></td>
+    </tr>
+    <tr>
+      <td width="160">Last Name</td>
+      <td><%= @agent.last_name %></td>
+    </tr>
+    <tr>
+      <td width="160">User Name</td>
+      <td><%= @agent.user_name %></td>
+    </tr>
+    
+    <tr>
+      <td>Email</td>
+      <td><%= @agent.email %></td>
+    </tr>
+
+    <tr>
+      <td width="160">Mobile</td>
+      <td><%= @agent.mobile %></td>
+    </tr>
+
+    <tr>
+      <td width="160">Location</td>
+      <td><%= @agent.location %></td>
+    </tr>
+
+    <table class="inner-table">
+      <h2>Claims Details</h2>
+    <tr>
+      <th>User Name</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Mobile</th>
+      <th>Policy Number</th>
+      <th>Location Of Loss</th>
+      <th>Damage Details</th>
+      <th>Status</th>
+    </tr>
+    <% @users.each do |user| %>
+     <tr>
+      <td><%= user.user_name %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.mobile %></td>
+      <% user.claims.each do |claim| %>
+       <td> <%= claim.policy_number %></td>
+       <td> <%= claim.location_of_loss %></td>
+       <td> <%= claim.damage_details %></td>
+       
+      <% end %>
+      <% if user.claim_status == true and user.completed_status== false %>
+        <td>In Process</td>
+      <% else %>
+        <td> Completed </td>
+      <% end %>
+    <% end %>
+    </tr>
+    </table>
+    <!--<tr>
+      <td>Admin Assigned Claims</td>
+      <td>
+        <% if !@end_users.blank? %>
+          <% @end_users.each do |end_user| %>
+            <%= link_to end_user.first_name,agent_project_details_admin_path(end_user) %>,
+          <% end %>
+        <% else %>
+          <div> No Claims assigned </div>
+        <% end %>  
+
+      </td>
+    </tr>
+
+    <tr>
+      <td> Claims Created by own </td>
+      <td>
+        <% if !@other_users.blank? %>
+         <% @other_users.each do |other_user| %>
+           <%= link_to other_user.user_name,agent_own_claim_admin_path(other_user) %>,
+          <% end %> 
+        <% else %>
+          <div> No Claims Created </div>  
+        <% end %>
+      </td>  
+    </tr> --> 
+    
+  </table>
+  <%= link_to "Back",view_agents_admin_index_path %>
+</div>
+

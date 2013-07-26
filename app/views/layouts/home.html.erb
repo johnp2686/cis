@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auth</title>
+  <%= stylesheet_link_tag "insurance","jquery-ui", :media => "all" %>
+  <%= javascript_include_tag "home", "jquery-1.8.3" ,"jquery-ui" %>
+  <%= javascript_include_tag "home", "slider/jquery-1.4.2.min","slider/jquery.jcarousel.min"  %>
+
+  <%= csrf_meta_tag %>
+</head>
+<body>
+ <%= yield %>
+</body>
+</html>

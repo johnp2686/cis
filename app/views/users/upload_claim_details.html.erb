@@ -1,0 +1,35 @@
+<h2> Upload Claim Details </h2>
+<% if flash[:error] %>
+  <div class="error">
+    <font color="red"><%= flash[:error] %><% flash.clear %></font>
+  </div>
+<% end %>
+<div>
+ <%= form_tag(upload_claim_details_users_path,html: { multipart: true },:method => :put) do %> 
+ <table>
+    <tbody>
+
+    <tr>
+      <td><label>Policy Document</label></td>
+      <td><%= file_field_tag :policy_document,:size=>30 %></td>
+    </tr>
+    <tr>
+      <td><label>Damage detail Photo(If any) </label></td>
+      <td><%= file_field_tag :damage_photo,:size=>30 %></td>
+    </tr>
+    <tr>
+      <td><label>Insurance Worth </label></td>
+      <td><%= text_field_tag :policy_worth,"",:size=>30 %></td>
+    </tr>
+    <tr>
+      <td><label>Monthly Premium </label></td>
+      <td><%= text_field_tag :monthly_premium,"",:size=>30 %></td>
+    </tr>
+    
+  </tbody></table>
+
+<%= submit_tag "submit", :class => "create_b" %>
+
+<%= link_to "cancel", {:controller =>"dashboard",:action=>"index"},:class=>"create_b create_b2",:style =>"margin-right:525px" %>
+<% end %>
+</div> 

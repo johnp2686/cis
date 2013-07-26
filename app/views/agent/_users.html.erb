@@ -1,0 +1,51 @@
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>    
+<% if @users.nil? %>
+  <h1> Currently you dont have Users assigned by Admin </h1>
+<% else %>
+  <h1> Recent Users </h1>
+    <table class="inner-table">
+      <tr>
+        <th>
+          <%= sortable_column "User Name",:column => "user_name" %>
+        </th>
+        <th>
+          <%= sortable_column "First Name",:column => "first_name"%>
+        </th>
+        <th>
+          <%= sortable_column "Last Name", :column => "last_name" %>
+        </th>
+        <th>
+          <%= sortable_column "Email",:column => "email" %>
+        </th>
+        <th>
+          <%= sortable_column "Mobile", :column => "mobile" %>
+        </th>
+        <th>
+          <%= sortable_column "Location", :column => "location" %>
+        </th>
+        <th>
+          <%= sortable_column "Damage Details",:column => "damage_details" %>
+        </th>
+        <th>
+          Add Claim
+        </th>
+      </tr>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.user_name %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.location %></td>
+        <td><%= user.damage_details %></td>
+        <td><%=  link_to "Create Claim", agent_new_claim_path(:id => user.id) %>
+      </tr>
+      <% end %>
+    </table>
+
+<% end %>

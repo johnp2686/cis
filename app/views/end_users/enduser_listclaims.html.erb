@@ -1,0 +1,51 @@
+
+<table class="inner-table">
+  <tr>
+    <th>
+      Policy Number 
+      <%#= sortable_column "Policy_number",:column => "policy_number" %>
+    </th>
+    <th> Date Of Loss
+     <%#= sortable_column "date of loss",:column => "date_of_loss" %>
+    </th>
+    <th> Location Of Loss
+     <%#= sortable_column "location of loss",:column => "location_of_loss" %>
+    </th>
+    <th> Claim Description
+      <%#= sortable_column "claim description",:column => "claim_description" %>
+    </th>
+    <th> 
+      Damage datails
+      <%#= sortable_column "Damage Details",:column => "damage_details" %>
+    </th>
+    <th>Agent Name</th>
+    <th> 
+      <%#= sortable_column "",:column => "" %>
+    </th>
+    <th> 
+      <%#= sortable_column "Status",:column => "" %>
+    </th>
+ 
+
+  </tr>
+  <form id="record2">
+  <% @claims.each do |claim| %>
+    <tr align="center" >
+      <td><%= claim.policy_number %></td>
+      <td><%= claim.date_of_loss %></td>
+      <td><%= claim.location_of_loss %></td>
+      <td><%= claim.claim_description %></td>
+      <td><%= claim.damage_details %></td>
+      <td> <%= @user.agent.user_name %></td>
+      <td> 
+      <b><%= link_to "Upload claim details",enduser_upload_claim_path(claim.id) %></b>
+  </td> 
+      <td> 
+        <%=  check_box_tag "claim_#{claim.id}" %>
+      </td> 
+      
+    </tr>  
+    
+  <% end %>
+</form>
+  </table>

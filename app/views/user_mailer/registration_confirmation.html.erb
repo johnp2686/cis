@@ -1,0 +1,19 @@
+Hello, <%= @user.user_name %>
+
+<p>Thank you for registering !</p>
+
+<p> Your default login details are : <br />
+
+
+User Name : <%= @user.user_name %><br />
+
+Email: <%= @user.email %>
+
+You are credential are created by Admin,
+
+</p>
+
+<p> <%= link_to "Change My Password","http://localhost:3000/users/password/edit?reset_password_token=#{@user.reset_password_token}" %> </p>
+
+
+

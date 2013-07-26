@@ -1,0 +1,28 @@
+<%= form_for message_customer_reply_url(@message), :method => :post do |f| %>
+<table widht="100%" border="0">
+ <%= token_tag nil %>
+<input name="authenticity_token" type="hidden" value="token_value"> 
+ <input name="id" type="hidden" value=<%= "#{params[:id]}" %>>  
+<tr>
+<td><label for="send_status">To</label></td>
+<td><input name="message[to]" value="<%= @to_email %>" size="74" type="text" /></td>
+</tr>
+<tr>
+<td><label for="send_status">Subject</label></td>
+<td><input id="send_status" name="message[subject]" size="74" type="text" /></td>
+</tr>
+<tr>
+<td><label for="userregister">Subject</label></td>
+<td><%= text_area_tag :editor, "", :rows => 30, :cols => 100 ,:name=>'message[message]'%></td>
+</tr>
+<tr>
+<td><input id="send_status" name="commit" type="submit" value="Send" /></td>
+</tr>
+
+
+</table>
+<% end%>
+
+
+
+

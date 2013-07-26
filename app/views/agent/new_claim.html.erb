@@ -1,0 +1,23 @@
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>
+<h2> New Claim for  <%= @user.user_name %></h1>
+  <%= form_tag agent_new_claim_path(:id => @user.id), :mthod => :post  %>
+    
+    <label>Policy Number</label>
+    <span><input type="text" name=claim[policy_number] /></span><br />
+    <label>Date Of Loss</label>
+    <span><input type="text" name=claim[date_of_loss] id="dob" /></span><br />
+    <label>Location Of Loss</label>
+    <span><input type="text" name=claim[location_of_loss] /></span><br />
+     <label>Claim Description</label>
+     <span><textarea cols="43" name="claim[claim_description]" rows="5"></textarea></span><br />
+    <label>Damage Details</label>
+    <span><textarea cols="43" name=claim[damage_details] rows="5"></textarea></span><br />
+<%= submit_tag "Create Claim" %><span>
+
+
+
+

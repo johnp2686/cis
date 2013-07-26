@@ -1,0 +1,31 @@
+
+<h3>Users Details</h3>
+<% if !@end_users.blank? %>
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>
+
+<table>
+  <tr>
+    <th> First Name </th>
+    <th> Email </th>
+    <th> Agent Name </th>
+  </tr>
+  <% @end_users.each do |end_user| %>
+  
+    <tr>
+      <td><%= end_user.first_name %></td>
+      <td><%= end_user.email %></td>
+      <% find_agent(end_user.agent_id) %>
+      <td><%= @agent.user_name %></td>
+    </tr>  
+    
+  <% end %>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+</table>
+
+

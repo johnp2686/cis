@@ -1,0 +1,72 @@
+<div class="filiter"><strong>Filter By</strong></div>
+    <%= form_tag(on_going_projects_admin_index_path , :id => 'search_form',:method => :get )   do %>
+      <% params[:search]||= {} %>
+      <% params[:reset]||= {} %>
+      
+      <%= collection_select :search,:agent_id, @agents_search, :id, :user_name, {:selected => @agent, :include_blank => '<Select Agent>'}%>
+      <%= collection_select :search,:user_name, @users_search, :id, :user_name, {:selected => @user_name, :include_blank => '<Select User Name>'}%>
+      
+        <div class="fil_butns">
+            <%= submit_tag("Search", :class=> "search_btn") %>
+            <%= submit_tag("Reset", :class=> "reset_btn",:name => 'reset', :value => 'reset') %>
+          </div>
+      
+    <% end %>
+
+
+<h3>On Going Claims Details </h3>
+<% if !@users.blank? %>
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>
+
+<table class="inner-table">
+  <tr>
+    <th> 
+      <%= sortable_column "Username", :column => "user_name" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Email", :column => "email" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Mobile", :column => "mobile" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Policy Number", :column => "policy_number" %>
+    </th>
+    <th> 
+      <%= sortable_column "Agent Name", :column => "agent_id" %> 
+    </th>
+    <th> 
+      View 
+    </th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.user_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.mobile %></td>
+      <% user.claims.each do |claim| %>
+        <td><%= claim.policy_number %></td>
+      <% end %>
+      <% agent_name(user.agent_id) %>
+      <td><%= @agent.user_name %></td>
+      <td>
+      <%= link_to(image_tag("view_detail.png"), view_users_conversations_admin_path(:id => user.id)) %>
+      </td>
+    </tr>  
+    
+  <% end %>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+</table>
+
+
+
+
+
+
+

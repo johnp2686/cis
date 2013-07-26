@@ -1,0 +1,171 @@
+      <!DOCTYPE html>
+<html>
+<head>
+  <title>Auth</title>
+  <%= stylesheet_link_tag   "application","jquery-ui", :media => "all" %>
+  <%#= stylesheet_link_tag :all, :recursive => true %>
+  <%= javascript_include_tag "application","rails","jquery-ui"%>
+  <%= javascript_include_tag :highcharts %>
+  <%= javascript_include_tag :defaults,"nested_form" %> 
+  <%= javascript_include_tag "jquery-1.8.2","jquery-1.4.2.min"  %>
+   
+  <%#= javascript_include_tag :all, :recursive => true %>
+  <%= csrf_meta_tag %>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+</head>
+<body>
+
+  <div id="header" class="png_bg">
+
+  <!--  START HEAD_WRAP -->
+  <div id="head_wrap">
+  
+  <!--  START LOGO -->
+    <div id="logo"><!-- <a href="index.html"><img src="images/logo.png" alt="Logo" width="400" height="100" class="png_bg"> --></a></div>
+    <!--  END LOGO  -->
+  
+  <!--  START LOGIN -->
+    <div id="login">
+    <!-- MODAL LINK - POINT THIS LINK TO YOUR EXTERNAL HTML FILE AND AMEND THE HEIGHT/WIDTH ACCORDINGLY -->
+    
+    <% if current_user %>
+    <p>Welcome Back <span class="highlight"> <%= current_user.user_name %></span></p>
+    <% end %>
+  </div>
+    <!--  END LOGO  --> 
+  
+    <!--  START NAVIGATION -->
+    <!-- the class "active" is used to highlight the current/active linke -->
+    <div id="nav">
+        <ul>
+          <li>
+        <%= link_to "Home", root_path,{ :class=>(controller.action_name == "index" ? 'noactiveclass png_bg' : 'noactiveclass png_bg' )} %>
+      </li>
+          <li>
+            <%= link_to "Dashboard", root_path,{ :class=>(controller.action_name == "index" ? 'active png_bg' : 'noactiveclass png_bg' )} %>
+            
+          </li>
+          <% if session[:user] %>
+            <li>
+            <%= link_to "Claim Status", claim_information_path,{ :class=>(controller.action_name == "claim_status" ? 'active' : 'noactiveclass' )} %>
+    <%#= nav_link_to 'Home', root_path %>
+          </li>
+          <li>
+            <%= link_to "claims",enduser_listclaims_path(:userclaims => "allclaims"),{ :class=>(controller.action_name == "enduser_listclaims" ? 'active' : 'noactiveclass' )} %>
+            <%#= link_to "Upload claim details",user_upload_users_path %>
+          </li>
+          <% end %>
+          <li>
+            <%#= link_to "Agents",  view_agents_users_path %>
+            
+          </li>
+          <% if can? :manage, :Admin %>
+            <li><%#= link_to "Add Agent", create_agent_admin_index_path %></li>
+            <li><%= link_to "Agents", view_agents_admin_index_path,{ :class=>(controller.action_name == "view_agents" ? 'active' : 'noactiveclass' )} %></li>
+            <li><%= link_to "Customers", {:controller => "admin", :action => "view_users" },{ :class=>(controller.action_name == "view_users" ? 'active' : 'noactiveclass' )} %> </li>
+            <li><%= link_to "Claims", view_claims_admin_index_path,{ :class=>(controller.action_name == "view_claims" ? 'active' : 'noactiveclass' )} %> </li>
+          <% end %>
+          <% if (can? :manage, :Agent) && (cannot? :manage, :Admin) %>
+            <li> <%= link_to "Customers", agent_agent_users_path,{ :class=>(controller.action_name == "agent_users" ? 'active' : 'noactiveclass' )} %></li>
+            <li><%= link_to "Claims", agent_agent_claims_path,{ :class=>(controller.action_name == "agent_claims" ? 'active' : 'noactiveclass' )} %></li>
+            <li><%= link_to "Quotation",add_quotation_path,{ :class=>(controller.action_name == "add_quotation" ? 'active' : 'noactiveclass' )}  %></li>
+
+          <% end %>
+          <% if ((can? :manage, :EndUser) || (can? :manage, :Agent)) && ( cannot? :manage, :Admin)  %>
+            <li><%= link_to "Messages", message_inbox_messages_path,{ :class=>(controller.action_name == "inbox_messages" ? 'active' : 'noactiveclass' )} %></li>
+          <% end %>
+          
+          <% if current_user %>
+            <li><%= link_to('Logout', destroy_user_session_path, :method => :delete, :class=>"png_bg noactiveclass") %></li>
+          <% else %>
+            <li><%= link_to "Log in", new_user_session_path ,{ :class=>((controller.controller_name == "sessions" && controller.action_name == "new") ? 'active png_bg' : 'png_bg noactiveclass' )} %></li>
+            <li><%= link_to "Register",  register_end_users_path,{ :class=>((controller.controller_name == "end_users" && controller.action_name == "register") ? 'active png_bg' : 'png_bg noactiveclass' )} %></li>
+          <% end %>
+        </ul>
+    </div> <!--  end div #nav -->
+    <!--  END NAVIGATION -->
+    
+  </div><!--  end div #head_wrap -->
+  <!--  END HEAD_WRAP -->
+   
+</div>
+
+
+<div id="sub_nav_wrap">
+    <!-- the class "active" is used to highlight the current/active linke -->
+        <div id="sub_nav">
+            <ul>
+                <% if (can? :manage, :Agent) && (cannot? :manage, :Admin) %>
+                  <li> <%#= link_to "View Users", agent_view_users_path %></li>
+                  <li><%#= link_to "All My Claims", agent_agent_claims_path %></li>
+                  <li><%#= link_to "In Process Claims", agent_in_process_claims_path %></li>
+                  <li><%#= link_to "completed Claims", agent_completed_claims_path %></li>
+                  <li><%#= link_to "pending claims", "#" %></li>
+                  <li><%#= link_to "Create New User","#", :class=>"last" %></li>
+                  <!-- <%# elsif  ((cannot? :manage, :Admin) && controller.controller_name == "claims" && controller.action_name == "enduser_listclaims") %>
+                    <li><%#= link_to "In Process Claims", enduser_listclaims_path(:userclaims => "inprocess") %></li>
+                  <li><%#= link_to "completed Claims", enduser_listclaims_path(:userclaims => "completed") %></li>
+                  <li><%#= link_to "pending claims", enduser_listclaims_path(:userclaims => "pending") %></li> -->
+                <% end %>
+          </ul>
+        </div><!--  end div #subnav -->
+    
+    </div>
+
+   <!--<%# flash.each do |name, msg| %>
+    <%#= content_tag :div, msg, :id => "flash#{name}" %>
+  <%# end %>
+  
+
+  <div id="user_nav">
+    <% if current_user %>
+      Logged in as <%= current_user.email %>
+      <%= link_to "Comments", user_comments_path(:user_id => current_user.id) %>
+      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+    <% else %>
+      <%= link_to "Log in", new_user_session_path %> or 
+      <%= link_to "Register",  register_end_users_path %>
+    <% end %>
+  </div> -->
+  <% if flash[:fail] %>
+  <div class="fail" >
+   <%= flash[:fail] %><% flash.clear %>
+  </div>
+  <% end %>
+  <% if flash[:alert] %>
+  <font color="red" >
+   <%= flash[:alert] %><% flash.clear %>
+  </font> 
+  <% end %>
+  <% if flash[:success] %>
+  <div class="success" >
+   <%= flash[:success] %><% flash.clear %>
+  </div> 
+  <% end %>
+  <% if flash[:notice] %>
+  <div class="information" >
+   <%= flash[:notice] %><% flash.clear %>
+  </div> 
+  <% end %>
+  <div id="content_wrapper">
+      <!--  START PRIMARY CONTENT -->
+    <div id="primary_content">
+
+<!-- <div id="flash">
+  <%# flash.each do |name, msg| %>
+    <%#= content_tag :div, msg, :id => "flash_#{name}" %>
+  <%# end %>
+</div> -->
+      <%= yield %>
+    </div>
+      <!--  END PRIMARY CONTENT -->
+  </div>
+
+    <div id="footer">
+      <p>© Copyright 2012 Fast Stream | Powered by <a href="#">CIS Template</a> | <a href="#">Top</a></p>
+   </div>
+  </body>
+</html>

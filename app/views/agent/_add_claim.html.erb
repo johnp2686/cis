@@ -1,0 +1,124 @@
+<%= form_for @user, :url => agent_add_claim_url(:id => @user.id), :method => :post do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation1">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= f.fields_for :claims  do |c| %>
+  <div id="errormsg"> </div>
+  <div class="claim_damge_details">
+    <h2>Claim Details</h2>
+    <div class="claim_new_fields"><span>Policy Number <strong>*</strong></span>
+    <%= c.text_field :policy_number,:class => "fields" %></div><br />
+    <div class="claim_new_fields"><span>Date Of Loss <strong>*</strong></span>
+    <%= c.text_field :date_of_loss,:class => "fields" %></div><br />
+    <div class="claim_new_fields"><span>Location Of Loss <strong>*</strong></span>
+    <%= c.text_field :location_of_loss,:class => "fields" %></div><br />
+    <div class="claim_new_fields"><span> Claim Description <strong>*</strong></span>
+    <%= c.text_field :claim_description,:class => "fields" %></div><br />
+    <div class="claim_new_fields"><span>Damage Details <strong>*</strong></span>
+    <%= c.text_field :damage_details,:class => "fields" %></div><br />
+ </div>
+  <div class="claim_damge_details">
+    <h2>SITUATION OF LOSS</h2>
+    <div class="claim_new_fields"><span>Did the loss or damage occur your home</span>
+    <%= c.check_box :is_damage_occur_your_home %></div>
+    <div class="claim_new_fields f1" style="display:none"><span>If Yes, describe and give the location/address of the premiss/place where loss or damage occured </span>
+    <%= c.text_field :damage_at_home_description_details %></div><br />
+    <div class="claim_new_fields"><span>If Yes, is your home or any part, let or sub-let?</span>
+    <%= c.check_box :is_home_or_any_part_lent_or_sublet %></div>
+    <div class="claim_new_fields f2" style="display:none;"><span>If yes, describe the parts lent, let or sub-let and provide the names of the occupants</span>
+    <%= c.text_field :lent_or_sublet_description %></div>
+  </div>
+  <div class="claim_damge_details">
+    <h2>DETAILS OF LOSS/DAMAGE</h2>
+    <div class="claim_new_fields"><span>Date and time of loss/damage.</span>
+    <%= c.text_field :date_of_loss %></div>
+     <div><span>Explain fully how the loss or damage occurred </span>
+    <%= c.text_field :damage_details %></div>
+    
+    <div><span>When was the loss or damage discovered?</span>
+    <%= c.text_field :damage_discovered_date %></div>
+ 
+  <div>
+    <span>Who made the discovery?</span><br>
+    <%= c.text_field :discovered_by %></div>
+ <div>
+   <span>When was the property last seen?</span><br>
+   <%= c.text_field :property_last_seen %></div>
+<div class="claim_new_fields"> 
+   <span>By whom was it last seen?</span><br>
+   <%= c.text_field :property_last_seen_by %></div>
+
+  <div><span>When were the Police notified?</span><br>
+   <%= c.text_field :time_of_police_notified %></div>
+   <div><span>Police Reference</span><br>
+   <%= c.text_field :police_reference %></div>
+ 
+ </div>
+  <div class="claim_damge_details">
+    <h2>ADDITIONAL INFORMATION</h2>
+    <div class="claim_new_fields"><span>Have you ever sustained a loss or made a claim against any insurer for loss or damage to property(other than vehicles covered by a motor insutance policy)? </span>
+    <%= c.check_box :have_made_any_claim_before %></div>
+   <div class="claim_new_fields f3" style="display:none"><span>Is Yes, please give dates, type of loss and settlement figure.</span><br>
+   <%= c.text_field :claim_settlement_details %></div>
+   <div class="claim_new_fields"><span>Are you sole owner of the lost, damaged or destroyed property?</span>
+   <%= c.check_box :are_you_owner_of_lost %></div>
+   <div class="claim_new_fields f4" style="display:none;"><span>If No, state the name(s) of any other interested parties and the nature of their interest.</span><br>
+   <%= c.text_field :state_the_names_owner %></div>
+   <div class="claim_new_fields"><span>Do you occupy the home as tenant?</span>
+   <%= c.check_box :occupied_home_as_tenant %></div>
+   <div class="claim_new_fields"><span class="f5" style="display:none;">If Yes, please give name and address of the landlord.</span>
+   <%#= c.text_field :  need to add address her %>
+   <div class="claim_new_fields f6" style="display:none;"><span>In respect of damage to the home or landlord's fixtures(including internal decorations), are you responsible for the repair of such damage under the terms of a tenancy agreement?</span>
+   <%= c.check_box :are_you_responsible_for_tenancy_agreement %></div>
+   <div class="claim_new_fields f7" style="display:none;" ><span>If Yes, what is the limit of your responsibilty?</span>
+   <%= c.text_field :limit_of_responsibility %></div>
+   <div class="claim_new_fields"><span>Was there at the time of the occurance any other existing insurance, effected by you or any other persons, on the property for which this claim is made? e.g. travel insurance.</span>
+   <%= c.check_box :have_estimates %></div>
+   <div class="claim_new_fields f8" style="display:none;"><span>If Yes, please give details here.</span><br> 
+   <%= c.text_field :estimated_cost_of_repair %></div>
+   <div class="claim_new_fields"><span>Are you registered (or liable to register) for VAT and therfore eligible to recover from Customs and Excise VAT on the cost of repair or replacement in respect of this claim?<br />
+    <b>The amount claimed should be net of recoverable VAT.</b></span>
+   <%= c.check_box :are_you_registered_for_VAT %></div>
+
+    </div>
+    <div class="claim_damge_details">
+      <h2> BUILDING DAMAGE - DETAILS OF CLAIM </h2>
+      <div class="claim_new_fields"><span>If you have estimates or accounts, please attach and send with the completed claim form. NB. If you are still awaiting estimates don't delay. Send us the form now and the estimates as soon as you receive them.
+      </span>
+      <div class="claim_new_fields"><span>Are estimates being obtained to be sent at a later date?</span>
+      <%= c.check_box :are_estimates_sent_late_date %></div>
+      <div class="f9" style="display:none;">
+      <div class="claim_new_fields"><span>Estimated cost of repair.</span><br>
+      <%= c.text_field :estimated_cost_of_repair %></div>
+      <div class="claim_new_fields"><span>Actual cost (if work has been done).</span><br>
+      <%= c.text_field :actual_cost %></div>
+      <div class="claim_new_fields"><span>How much are you claiming?</span><br>
+      <%= c.text_field :claiming_cost %></div>
+    </div>
+  </div>
+    <div class="claim_damge_details">
+       <div class="claim_new_fields"><span>Policy Document</span>
+   <%= c.file_field :policy_document %></div><br />
+   <div class="claim_new_fields"><span>Damage Photo</span>
+   <%= c.file_field :damage_photo%></div><br />
+ </div>
+  <% end %>
+
+   <%= f.submit "Submit Claim",:onclick => "claimform(#{@user.id});" %>
+<% end %>
+
+
+
+
+
+
+

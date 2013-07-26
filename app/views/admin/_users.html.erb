@@ -1,0 +1,129 @@
+<script>
+  checked = false;
+  function checkedAll()
+  {
+    if (checked == false){checked = true}else{checked = false}
+    for (var i = 0; i < document.getElementById('record').elements.length; i++)
+    {
+      document.getElementById('record').elements[i].checked = checked;
+    }
+  }
+
+  function assign_agent_to_users(title)
+  {
+    var conform=0;
+    var r=0;
+    var i=0;
+    var records = new Array();
+     
+    if(title == "Assign_agent"){
+      
+      var agent_id = document.getElementById("search_agent");
+      var agent = agent_id.options[agent_id.selectedIndex].value;
+    <% @users.each do |user|%>
+        if(document.getElementById("record_<%= user.id%>" ).checked == true)
+        {
+          records.push("<%= user.id %>");
+        }
+        
+  <% end %>
+  
+      if(records.length < 1 )
+      {
+        alert('Select at least one or more users to assign agent.');
+      }
+      else{
+        if(agent == '')
+        {
+          alert('Select Agent to assign users')
+        }
+        else
+       {
+         window.location ="/admin/assign_agent?records="+records+"&title="+title+"&agent_id="+agent
+       }
+      }
+    }
+  }
+</script>
+
+
+<div class="filiter"><strong>Filter By</strong></div>
+    <%= form_tag(view_users_admin_index_path , :id => 'search_form',:method => :get )   do %>
+      <% params[:search]||= {} %>
+      <% params[:reset]||= {} %>
+      
+      
+      <%= collection_select :search,:location_id, @locations, :location, :location, {:selected => @location, :include_blank => '<Select Location>'}%>
+        <div class="fil_butns">
+            <%= submit_tag("Search", :class=> "search_btn") %>
+            <%= submit_tag("Reset", :class=> "reset_btn",:name => 'reset', :value => 'reset') %>
+          </div>
+      
+    <% end %>
+
+
+
+
+<h3>Users Details </h3>
+<% if flash[:success] %>
+  <div class="success">
+    <%= flash[:success] %><% flash.clear %>
+  </div>
+<% end %>
+<% if !@users.blank? %>
+<table class="inner-table">
+  <tr>
+    <th> 
+      <%= sortable_column "First Name", :column => "first_name" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Last Name", :column => "last_name" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Email", :column => "email" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Mobile Number", :column => "mobile" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Policy Number", :column => "policy_number" %>  
+    </th>
+    <th> 
+      <%= sortable_column "Location", :column => "location" %> 
+    </th>
+    <th>Select All <%= check_box 'checkedAll', '',:onClick=>"checkedAll()",:checked=> false %></th>
+  </tr>
+  <form id="record">
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.mobile %></td>
+      <td><%= user.policy_number %></td>
+      <td><%= user.location %></td>
+      <td> 
+        <%=  check_box_tag "record_#{user.id}" %>
+      </td>
+    </tr>  
+    
+  <% end %>
+  </table>
+  <div>
+  <%# unless params[:search][:location_id].blank? %>
+    <%= collection_select :search,:agent, @agents, :id, :user_name, {:selected => @agent, :include_blank => '<Select Agent>'}%>
+    <%= link_to "Assign Agent","javascript:void(0)",{:title=>"Assign_agent", :onclick=>"assign_agent_to_users(this.title)"}%>
+     
+  <%# end %>  
+  </div>
+   <%= will_paginate @users %>
+</form>
+
+
+<% else %>
+  <div ><font color="red">No records found</font> </div>
+<% end %>
+<br />
+<br />
+
+

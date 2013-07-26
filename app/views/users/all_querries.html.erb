@@ -1,0 +1,13 @@
+<h1> All Users Querries </h1>
+<table class="inner-table">
+  <tr>
+    <th> Description</th>
+    <th></th>
+  </tr>
+<% @questions.each do |q| %>
+  <tr>
+    <td><%= q.description %></td>
+    <td><%= link_to "Reply", add_answer_user_path(:id => q.id) %></td>
+  </tr>
+  <% end %>
+</table>

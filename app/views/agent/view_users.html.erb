@@ -1,0 +1,13 @@
+<%= form_tag agent_view_users_path, :method => 'get', :id => "products_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <div id="users"><%= render 'users' %></div>
+
+<% end %>
+           
+
+           
+
+

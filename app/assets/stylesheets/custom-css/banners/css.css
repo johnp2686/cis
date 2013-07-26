@@ -1,0 +1,54 @@
+*{ margin:0; padding:0; } /*Quick reset*/
+#banners {
+	width:999px;
+	height: 261px;
+	position: relative;
+	font-family: Arial, sans-serif;
+	margin:0px;
+	/*border:1px #CCC solid;*/
+}
+#banners .banner{
+	position: absolute;
+	top:0;
+	left:0;
+	display:block;
+}
+.banner.current{z-index: 2;}
+#controls{
+	position:absolute;
+	top:12px;
+	right:20px;
+	z-index:10;
+}
+#controls li { list-style:none; display:inline;}
+#controls li a{
+	background: url(bg1.png) no-repeat;
+	display:-moz-inline-box; /* < = FF2 hack */
+	display:inline-block;
+	margin-right:2px;
+	font-size:11px;
+	height:25px; width:25px;
+	padding:3px 2px 1px 0 ;
+	text-align:center;
+	
+
+	text-decoration:none;
+	color: #fff;
+	font-weight:bold;
+/*	background:#CCC;*/ /* Specify a fall back color */
+/*	background:rgba(204,204,204,.7);*/
+	/*border:1px solid #CCC;*/
+	outline:none;
+}
+#controls li.active a{
+	background:url(bg2.png) no-repeat;
+/*	border-color:#000;*/
+	color:#FFF;
+	/*background-color:#333;*/
+}
+#controls li a:hover{
+	background:url(bg2.png) no-repeat;
+	/*border-color:#FFF;*/
+	color: #FFF;
+	/*background-color:#333;*/
+}

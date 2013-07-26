@@ -1,0 +1,6 @@
+<h1> Converasations</h1>
+<p><%= @question.description %></p><br />
+<% @answers.each do |q| %>
+  <p><%= q.description %></p>
+  <p><%= link_to "Reply", add_answer_user_path(:id => q.id) %></p><br />
+<% end %>

@@ -1,0 +1,41 @@
+<div>
+
+<%= form_for @claim, :url => user_upload_users_path, :html => { :method => :post } do |f| %>
+
+      <% if @claim.errors.any?  %>
+      <div id="error_explanation">
+        <h2>You need to fill the following fields</h2>
+        <ul>
+          <% @claim.errors.full_messages.each do |msg| %>
+            <li><p><%= msg %></p></li>
+          <% end %>
+        </ul>
+      </div>
+     <% end %>
+ <table>
+    <tbody>
+     <tr>
+      <td><label><%= f.label :Policy_Document,:class=>'label' %></td></label>
+     <td><%= f.file_field :policy_document %></td>
+   </tr>
+   <tr>
+     <td><label><%= f.label :Damage_Photo,:class=>'label' %></td></label>
+     <td><%= f.file_field :damage_photo %></td>
+   </tr>  
+   <tr>
+     <td><label><%= f.label :Policy_Worth,:class=>'label' %></td></label>
+     <td><%= f.text_field :policy_worth %></td>
+   </tr>
+   <tr>
+     <td><label><%= f.label :Monthly_Premium,:class=>'label' %></td></label>
+     <td><%= f.text_field :monthly_premium %></td>
+   </tr>
+   
+    </tbody>
+  </table>   
+
+     <%= f.submit "Submit",:class => "create_b" %>
+     <%= link_to "cancel", {:controller =>"dashboard",:action=>"index"},:class=>"create_b create_b2",:style =>"margin-right:525px" %>
+
+<% end %>
+</div>

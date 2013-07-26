@@ -1,0 +1,17 @@
+<%= form_tag agent_in_process_claims_path, :method => 'get', :id => "products_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%#= text_field_tag :mobile,params[:mobile] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <div id="in_process_claims"><%= render 'in_process_claims' %></div>
+<% end %>
+
+
+
+
+
+
+
+
+

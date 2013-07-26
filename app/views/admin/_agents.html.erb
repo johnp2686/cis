@@ -1,0 +1,53 @@
+<h3 style="float:left; margin:0">Agents</h3>
+<% if !@agents.blank? %>
+<% if flash[:success] %>
+  <div class="success">
+    <%= flash[:success] %><% flash.clear %>
+  </div>
+<% end %>
+
+<table class="inner-table">
+  <tr>
+    <th> 
+      <%= sortable_column "Username",:column =>"user_name" %> 
+    </th>
+    <th> 
+      <%= sortable_column "First Name", :column => "first_name" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Last Name", :column => "last_name" %>
+    </th>
+    <th> 
+      <%= sortable_column "Email", :column => "email" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Mobile",:column => "mobile" %> 
+    </th>
+    <th> 
+      View Details 
+    </th>
+
+  </tr>
+  <% @agents.each do |agent| %>
+    <tr>
+      <td><%= agent.user_name %></td>
+      <td><%= agent.first_name %></td>
+      <td><%= agent.last_name %></td>
+      <td><%= agent.email %></td>
+      <td><%= agent.mobile %></td>
+      <td>
+        <%= link_to image_tag('view_detail.png'),view_agent_details_admin_path(agent) %>
+      </td>
+    </tr>  
+    
+  <% end %>
+  </table>
+  <div class="pagination" style="clear: both; margin: 10px 0px 0px; float: right;"><%= will_paginate @agents %></div>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+
+
+
+
+

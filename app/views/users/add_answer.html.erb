@@ -1,0 +1,7 @@
+<h1> New Answer </th>
+  <%= form_for @answer, :url => add_answer_user_path, :html => { :id=>@question.id , :method => :post} do |q| %>
+<div class="field">
+  <%= q.label :description %><br />
+  <%= q.text_area :description, :rows => 5 %>
+  <%= q.submit "Submit" %>
+  <% end %>

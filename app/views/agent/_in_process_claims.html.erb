@@ -1,0 +1,45 @@
+
+<h3>In Process Claims Details </h3>
+<% if !@users.blank? %>
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>
+
+<table class="inner-table">
+  <tr>
+    <th> 
+      <%= sortable_column "Policy Number",:column => "policy_number" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Damage Details",:column => "damage_details" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Location",:column => "location_of_loss" %> 
+    </th>
+    <th> 
+      <%= sortable_column "Claim Status",:column => "claim_status" %> 
+    </th>
+    <th> 
+      View 
+    </th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.policy_number %></td>
+      <td><%= user.damage_details %></td>
+      <td><%= user.location_of_loss %></td>
+      <td><%= user.claim_status %></td>
+
+       <td><%= link_to image_tag('view_detail.png') %></td> 
+      <%#= link_to image_tag('view_detail.png'),view_on_going_project_admin_path(user.id) %>
+       <%#= link_to image_tag('show_icon.jpg'),view_on_going_project_admin_path(user.id) %>
+        
+    </tr>  
+    
+  <% end %>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+</table>

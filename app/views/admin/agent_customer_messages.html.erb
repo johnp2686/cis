@@ -1,0 +1,40 @@
+<div class= "agent_customer_details">
+ 
+  <div class=".customer_agent_info">
+    <div class="customer_info">
+      <h3> Customer Information</h3>
+      <p><b> Customer Name:</b> </b> <%= @customer.first_name+' '+@customer.last_name %></p>
+      <p><b>Email        :</b>  <%= @customer.email %> </p>
+      <p><b>Mobile       :</b>  <%= @customer.mobile %></p>
+    </div>
+    <div class="agent_info">
+      <% if @agent.present? %>
+      <h3> Agent Information</h3>
+      <p><b>Agent Name:</b>  <%= @agent.first_name+' '+@agent.last_name %></p>
+      <p><b>Email        :</b>  <%= @agent.email %> </p>
+      <p><b>Mobile       :</b>  <%= @agent.mobile %></p>
+      <% else %>
+        This claim doesn't have agent 
+      <% end %>
+    </div>
+  </div>
+  <div class="sentstatus_info">
+    <h3>ALL MAILS REGARDING CLAIM NUMBER <%= Claim.find(params[:id]).policy_number %></h3>
+    <table class="inner-table">
+      <tr>
+        <th>From</th>
+        <th class="subject_header">Subject</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+    <% @messages.each do |mes| %>
+    <tr>
+      <td><%= mes.from %></td>
+      <td><%= mes.subject %></td>
+      <td><%= time_and_day(mes.created_at) %></td>
+      <td><%= link_to "Read Full..", message_agent_customer_message_path(:id => mes.id) %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+</div>

@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Insurance Choice</title>
+<link href="css/insurance.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="slider/jquery-1.4.2.min.js"></script>
+<!--
+  jCarousel library
+-->
+<script type="text/javascript" src="slider/jquery.jcarousel.min.js"></script>
+
+<script type="text/javascript">
+
+function mycarousel_initCallback(carousel)
+{
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    carousel.buttonPrev.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+        carousel.stopAuto();
+    }, function() {
+        carousel.startAuto();
+    });
+};
+
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+        auto: 2,
+  
+        wrap: 'last',
+        initCallback: mycarousel_initCallback
+    });
+});
+
+
+
+
+</script>
+
+<link href="slider/skin.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div class="wrapper-bg">
+<div id="container">
+<div id="home_header">
+
+<div class="logo"><a href="#"><img src="assets/logo.png" alt="Logo" width="104" height="49" border="0" /></a></div>
+
+<div class="top-menu-container">
+<ul class="top-menu">
+<li><a href="#">File a Claim</a></li>
+<!-- <li><a href="#">Get A Quote</a></li>
+<li><a href="#">Find An Agent</a></li> -->
+<% if current_user %>
+  <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+<% else %>
+  <li><%= link_to "Sign In", new_user_session_path %></li>
+  <li><%= link_to "Register", register_end_users_path %></li>
+<% end %>
+<li><a href="#">Contact us</a></li>
+
+
+</ul>
+
+</div>
+
+<div class="search-container ">
+<div class="search-text">Search</div>
+<div class="search-feild-bg">
+<input name="" type="text" class="search-feild01" />
+  <div class="search-img"><a href="#"><img src="assets/search.jpg" alt="Search" width="31" height="31" border="0" /></a></div>
+ </div>
+
+</div>
+
+<div class="menu-container">
+<ul class="menu">
+                                                                   
+<li><a href="#">Insurance Choice </a></li>
+<li> <a href="#">Insurance 101 </a></li>
+   <li> <a href="#">Claim Centre </a></li>
+   
+        <li class="none"> <a href="#"> About Us </a></li>
+</ul>
+</div>
+<div class="menu-container-shahdow"><img src="assets/menu-shadow.jpg" alt="menu shadow" width="1000" height="27" /></div>
+ </div>
+
+<div id="banner"><img src="assets/banner.jpg" width="1001" height="276" />
+
+<div class="find-agent">
+
+<div class="find-agent-content-container">
+  <label for="textfield"></label>
+  <input name="textfield" type="text" class="find-agent-feild01" id="textfield" />
+  <div class="find-agent-now-button"><a href="#"><img src="assets/now-button.jpg" width="126" height="50" border="0" /></a></div>
+</div>
+</div>
+
+<div class="get-quote-button"><a href="#"><img src="assets/get-quote.png" width="341" height="67" border="0" /></a></div>
+ </div>
+
+<div class="welcomenote"><h1>Lorem Ipsum</h1> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+
+<div class="center-white-body">
+<div class="blue-columns">
+<div class="blue-columns-text">Auto
+ Insurance</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Home</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Boat</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Motorcycle</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Link 2</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Umbrella</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Classic Car</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Buisness</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="blue-columns">
+<div class="blue-columns-text">Auto
+ Insurance</div>
+<div class="blue-columns-more-img"><a href="#"><img src="assets/more.jpg" alt="More" width="86" height="54" border="0" /></a></div>
+</div>
+<div class="quote-tab"><a href="#"><img src="assets/build-quote-tab.jpg" width="936" height="71" border="0" /></a></div>
+</div>
+
+<div class="slider">
+<div id="wrap">
+
+
+  <ul id="mycarousel" class="jcarousel-skin-tango">
+    <li><img src="assets/claim-form.jpg" alt="" width="293" height="103" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+    <li><img src="assets/claim-form.jpg" width="293" height="103" alt="" /></li>
+  </ul>
+
+</div>
+
+
+
+</div>
+
+
+<div class="clear"></div>
+</div>
+
+</div>
+<div id="footer-bg">
+<div class="footer">
+<div class="copy-right">2012Privacy Policy</div>
+<div class="community">
+<div class="face-book"><a href="#"><img src="assets/rss.jpg" width="28" height="28" border="0" /></a></div>
+<div class="face-book"><a href="#"><img src="assets/twitter.jpg" width="28" height="28" border="0" /></a></div>
+<div class="face-book"><a href="#"><img src="assets/linkedin.jpg" width="28" height="28" border="0" /></a></div>
+<div class="face-book"><a href="#"><img src="assets/facebook.jpg" width="28" height="28" border="0" /></a></div>
+
+</div>
+
+</div>
+<div class="clear"></div>
+</div>
+</body>
+</html>
+

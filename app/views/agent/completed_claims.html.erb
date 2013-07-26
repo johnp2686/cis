@@ -1,0 +1,43 @@
+
+<h3>In Completed Claims Details </h3>
+<% if !@users.blank? %>
+<% if flash[:success] %>
+  <font color="green">
+    <%= flash[:success] %><% flash.clear %>
+  </font>
+<% end %>
+
+<table class="inner-table">
+  <tr>
+    <th> Username </th>
+    <th> Email </th>
+    <th> Mobile </th>
+    <th> Policy Number </th>
+    <th> View </th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.user_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.mobile %></td>
+      <% user.claims.each do |claim| %>
+       <td><%= claim.policy_number %></td>
+      <% end %>
+       <td><%= link_to image_tag('view_detail.png') %></td> 
+      <%#= link_to image_tag('view_detail.png'),view_on_going_project_admin_path(user.id) %>
+       <%#= link_to image_tag('show_icon.jpg'),view_on_going_project_admin_path(user.id) %>
+        
+    </tr>  
+    
+  <% end %>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+</table>
+
+
+
+
+
+
+

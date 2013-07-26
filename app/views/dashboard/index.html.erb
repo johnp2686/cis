@@ -1,0 +1,270 @@
+
+<marquee behavior="scroll" style="color:#D36013; font-size:15px;" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+  <% if (can? :manage, :Agent) && (cannot? :manage, :Admin)  %>
+   <%= link_to "You have #{ Sentstatus.where("agent_id=? AND is_agent_viewed=?","#{current_user.id}", false).all.count} new mails!", message_inbox_messages_path %>
+  <% elsif (cannot? :manage, :Admin) %>
+  <%= link_to "You have #{ Sentstatus.where("customer_id=? AND is_customer_viewed=?","#{current_user.id}", false).all.count} new mails!", message_inbox_messages_path %>
+    <% end %></marquee>
+
+<script>
+$(function () {
+    var chart;
+    var ongoing_str = "<%= @combine_months.join(",") if @combine_months %>" ;
+    var months = new Array();
+    months=ongoing_str.split(",");
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column'
+            },
+            title: {
+                text: 'Monthly Claims Details'
+            },
+            //subtitle: {
+              //  text: 'Source: WorldClimate.com'
+            //},
+            xAxis: {
+                categories: months
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'claims'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                backgroundColor: '#FFFFFF',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 100,
+                y: 70,
+                floating: true,
+                shadow: true
+            },
+            tooltip: {
+                formatter: function() {
+                    return ''+
+                        this.x +': '+ this.y ;
+                }
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+                series: [{
+                name: 'Completed Claims',
+                data: <%= @completed_claims %>
+    
+            }, {
+                name: 'Ongoing Claims',
+                data: <%= @on_going_claims %>
+    
+            }]
+        });
+    });
+    
+});
+
+
+
+
+$(function () {
+    var chart;
+    var str = "<%= @month.join(",") if @month %>" ;
+    var months = new Array();
+    months=str.split(",");
+    
+    $(document).ready(function() {
+        
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container1',
+                type: 'column'
+            },
+            title: {
+                text: 'Monthly Registered users details'
+            },
+            //subtitle: {
+              //  text: 'Source: WorldClimate.com'
+            //},
+            xAxis: {
+              categories: months
+                               
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Users'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                backgroundColor: '#FFFFFF',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 100,
+                y: 70,
+                floating: true,
+                shadow: true
+            },
+            tooltip: {
+                formatter: function() {
+                    return ''+
+                        this.x +': '+ this.y ;
+                }
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+                series: [{
+                name: 'Registered Users',
+                data:  <%= @val %>
+                 
+    
+            }]
+        });
+    });
+    
+});
+
+
+</script >
+
+
+<% if !current_user %>
+  <h1>TODO  DASHBOARD HERE</h1>
+  <br />
+<% end %> 
+<% if session[:admin] %>
+ <% if !@users.blank? %>
+ <div class="success">  
+  <%= link_to "Registered Users Count #{@users.count}", view_users_admin_index_path %></div>
+    <h2> Registered Users details </h2>
+    
+    <div id="container1" style="height: 300px; width: 700px"></div>
+    &nbsp &nbsp
+ <% else %>
+   No Users Registered Recently   
+ <% end %>
+  <%= link_to "View more...",view_users_admin_index_path %><br/><br/><br/>
+    <h2> Completed and on going claims details </h2>
+    <div><%= link_to "On going Claims",on_going_projects_admin_index_path %></div>
+    <div><%= link_to "Completed Claims",completed_projects_admin_index_path %></div>
+    <div><%= link_to "Users Questions and answers", all_querries_users_path %><br/><br/>
+    <div id="container" style="height: 300px; width: 700px"></div>
+<%else%>
+    <div id="container" style="height: 300px; width: 700px"></div>
+
+
+
+<div id="light" class="white_content">
+
+<div align="center" class="mid_cont">
+  <h3>Create Agent</h3>
+  <table>
+  <% @user = User.new %>
+  <%= form_for create_agent_admin_index_path(@user) do |f| %>
+   <% if @user.errors.any? %>
+     <div id="errorExplanation">
+        <font color="red"><h2><%= pluralize(@user.errors.count, "error") %> prohibited this post from being saved:</h2></font>
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+           <font color="red"><li><%= msg %></li></font>
+        <% end %>
+        </ul>
+     </div>
+    <% end %>
+    <tr>
+      <td><label>Employee Id</label></td>
+      <td><%= f.text_field :emp_id %></td>
+    </tr>
+   
+    <tr>
+      <td><label>First Name</label></td>
+      <td><%= f.text_field :first_name %></td>
+    </tr>
+    <tr>
+      <td><label>Last Name</label></td>
+      <td><%= f.text_field :last_name %></td>
+    </tr>
+    <tr>
+      <td><label>Email</label></td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td><label>User Name</label></td>
+      <td><%= f.text_field :user_name %></td>
+    </tr>
+    <tr>
+      <td><label>Date Of Birth</label></td>
+      <td>
+        <%= f.text_field :dob,:id=>"dob" %>
+        <%#= image_tag "datepicker.png" %>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Mobile</label></td>
+      <td><%= f.text_field :mobile %></td>
+    </tr>
+    <tr>
+      <td><label>Gender</label></td>
+      <td>
+        <%= f.radio_button :gender, "Male",:checked => true %>Male
+        <%= f.radio_button :gender, "Female" %>Female    
+      </td>
+    </tr>
+    <tr>
+      <td><label>Location</label></td>
+      <td><%= f.text_field :location %></td>
+    </tr>
+    <tr>
+      <td><label>Zip Code</label></td>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td><label>Address</label></td>
+      <td><%= f.text_area :address , :cols => 43,:rows => 5 %></td>
+    </tr>
+  </table>
+   <p class="create_btn"><%= f.submit "Create", :id => "create-agent" %></p>
+  <% end %>
+  
+ </div>
+
+
+
+         <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="close_btn">Close</a></div>
+        <div id="fade" class="black_overlay"></div>
+
+ <% end %>
+
+
+
+ <% if session[:user] %>
+   <h3>Common Property Insurance Claim Questions</h3>
+   <p> What Do I Need to Know? </p>
+
+    <p>My Home Was Damaged During a Burglary. Is This Damage Covered?
+    </p>
+    <div>
+       Generally, your policy's Dwelling Protection coverage would apply to this situation. However, any of our claim representatives would be happy to explain what your policy covers. 
+    </div><br/>
+   <p>Do You Handle Property Damage from Natural Disasters Differently?</p>
+     <div>
+        If a natural disaster results in a significant number of claims reported at one time, we would probably declare these losses a "catastrophe." In these events we use specialized catastrophe adjusters and, depending on the conditions, we advertise on local radio stations and may place banners around the affected area with specific instructions for getting help with your claim.
+
+          In most cases, mobile response units would be on hand to offer further assistance. There is also a phone number, 1.800.54.STORM (1.800.547.8676), set up specifically for our customers during catastrophes. Our Catastrophe Information Site can provide you with additional resources. 
+     </div><br/>
+   <p>Does My Homeowners Policy Cover Flood Damage Caused?</p>
+      <div>
+        Flood coverage is provided through the National Flood Insurance Program, and if you have one of those policies, your damages may be covered. Your Allstate homeowners policy does not cover flood damage.
+      </div>        
+
+ <% end %>       

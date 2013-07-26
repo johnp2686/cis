@@ -1,0 +1,115 @@
+// Place all the styles related to the admin controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.black_overlay{
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index:1001;
+  -moz-opacity: 0.8;
+  opacity:.80;
+  filter: alpha(opacity=80);
+}
+ 
+.white_content {
+  display: none;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  /*height: 50%;*/
+  /*padding: 16px;*/
+  border: 16px solid orange;
+  border-top: 40px solid orange;
+  background-color: white;
+  z-index:1002;
+  /*overflow: auto;*/
+}
+.white_content .mid_cont{
+  height: 470px;
+  overflow: auto;
+
+}
+.white_content .mid_cont h3{
+   color: #FFFFFF !important;
+    float: left;
+    font-size: 24px;
+    position: absolute;
+    top: -46px;
+    width: 100%;
+    z-index: 10;
+  }
+  .close_btn{
+    position: absolute;
+    right: 0;
+    top: -25px;
+    z-index: 99;
+    font-size: 0;
+    background: url("/assets/close.png");
+    width: 16px;
+    height: 16px;
+  }
+#light table tr td label{
+  float: left;
+  line-height: 25px;
+  width: 140px;
+}
+#light table tr{
+  float: left;
+  clear: both;
+  margin: 2px 0;
+}
+#light table tr td input{
+  padding: 2px 5px;
+  float: left;
+}
+.create_btn{
+    float: left;
+    font-size: 12px;
+    margin: 0 0 7px 245px !important;
+    padding: 0;
+}
+.create_btn input{
+  color: #FFFFFF;
+  background: url(/assets/create_bg.jpg) repeat-x;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.agent_customer_details{
+    width: auto;
+    height: auto;
+    }
+.agent_info{
+    margin: 0px;
+    float: right;
+    width: 469px;
+    height: 122px;
+    }
+.customer_agent_info{
+    background-color: #F1F1E7;
+    height: auto;
+    width: 400px;
+    }
+.customer_info{
+    float: left;
+    }
+  .sentstatus_info{
+    height: 200px;
+    width: 903px;
+    margin: 0px;
+    float: left;
+    }
+
+ .subject_header{
+    width: 500px;
+}

@@ -1,0 +1,77 @@
+
+ <h2 style="text-align:center;margin-top:10px"> Your Details </h2>
+ <% if flash[:success] %>
+  <div class="success">
+    <%= flash[:success] %><% flash.clear %>
+  </div>
+<% end %>
+<div class="inner_tble">
+  <div class="tab_div">
+    
+    <div class="blck">
+      <p class="left"><label>User Name</label></p>
+      <p class="right"><%= @user.user_name %></p>
+    </div>
+   
+    <div class="blck">
+      <p class="left"><label>First Name</label></p>
+      <p class="right"><%= @user.first_name %></p>
+    </tr>
+    <div class="blck">
+       <p class="left"><label>Last Name</label></p>
+      <p class="right"><%= @user.last_name %></p>
+    </tr>
+    <div class="blck">
+      <p class="left"><label>Email</label></p>
+      <p class="right"><%= @user.email %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Mobile</label></p>
+      <p class="right"><%= @user.mobile %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Date Of Birth</label></p>
+      <p class="right">
+        <%= @user.dob %>
+      </p>
+    </div>
+        
+    <div class="blck">
+      <p class="left"><label>Location</label></p>
+      <p class="right"><%= @user.location %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Zip Code</label></p>
+      <p class="right"><%= @user.zip %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Status</label></p>
+      <p class="right">In Progress</p>
+    </div>
+
+    
+
+    <h2 style="font-size:15px;width:auto;float:left; border:0">Your Agent Details </h2> 
+    <div class="create_agent"> 
+      <%= link_to "Send Mail to your Agent", send_mail_users_path(:id => @user.id,:email => @user.agent.email),:class=>"create_b create_b2"%>
+    </div>
+  <p class="divider"></p>
+    <div class="blck">
+      <p class="left"><label>First Name</label></p>
+      <p class="right"><%= @user.agent.first_name %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Last Name</label></p>
+      <p class="right"><%= @user.agent.last_name %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Email</label></p>
+      <p class="right"><%= @user.agent.email %></p>
+    </div>
+    <div class="blck">
+      <p class="left"><label>Mobile</label></p>
+      <p class="right"><%= @user.agent.mobile %></p>
+    </div>
+    
+  </div>
+</div>

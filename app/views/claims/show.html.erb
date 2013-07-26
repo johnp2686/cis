@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Policy number:</b>
+  <%= @claim.policy_number %>
+</p>
+
+<p>
+  <b>Date of loss:</b>
+  <%= @claim.date_of_loss %>
+</p>
+
+<p>
+  <b>Location of loss:</b>
+  <%= @claim.location_of_loss %>
+</p>
+
+<p>
+  <b>Claim description:</b>
+  <%= @claim.claim_description %>
+</p>
+
+<p>
+  <b>Damage details:</b>
+  <%= @claim.damage_details %>
+</p>
+
+
+<%= link_to 'Edit', edit_claim_path(@claim) %> |
+<%= link_to 'Back', claims_path %>

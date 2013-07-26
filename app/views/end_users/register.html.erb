@@ -1,0 +1,81 @@
+<div align="center">
+  <h3>User Registration</h3>
+  <table widht="100%" border="0">
+  <%= form_for :end_user do |f| %>
+   <% if @end_user.errors.any? %>
+     <div id="errorExplanation">
+        <font color="red"><h2><%= pluralize(@end_user.errors.count, "error") %> prohibited this post from being saved:</h2></font>
+        <ul>
+        <% @end_user.errors.full_messages.each do |msg| %>
+           <font color="red"><li><%= msg %></li></font>
+        <% end %>
+        </ul>
+     </div>
+    <% end %>
+   
+    
+    <tr>
+      <td><label>First Name</label></td>
+      <td><%= f.text_field :first_name %></td>
+    </tr>
+    <tr>
+      <td><label>Last Name</label></td>
+      <td><%= f.text_field :last_name %></td>
+    </tr>
+    <tr>
+      <td><label>Email</label></td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td><label>User Name</label></td>
+      <td><%= f.text_field :user_name %></td>
+    </tr>
+    <tr>
+      <td><label>Date Of Birth</label></td>
+      <td>
+        <%= f.text_field :dob, :id=>"dob", :class =>"datepicker-dob" %>
+        <%#= image_tag "datepicker.png" %>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Mobile</label></td>
+      <td><%= f.text_field :mobile %></td>
+    </tr>
+    <tr>
+      <td><label>Gender</label></td>
+      <td>
+        <%= f.radio_button :gender, "Male",:checked => true %>Male
+        <%= f.radio_button :gender, "Female" %>Female    
+      </td>
+    </tr>
+    
+    
+    <tr>
+      <td><label>Location</label></td>
+      <td><%= f.text_field :location %></td>
+    </tr>
+    <tr>
+      <td><label>Zip Code</label></td>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+      
+    <tr>
+      <td><label>Policy Number</label></td>
+      <td><%= f.text_field :policy_number %></td>
+    </tr>
+    <tr>
+      <td><label>Policy Company Name</label></td>
+      <td><%= f.text_field :policy_company_name %></td>
+    </tr>
+    
+    <tr>
+      <td><label>Damage Details</label></td>
+      <td><%= f.text_area :damage_details,:cols=>43,:rows=>5 %></td>
+    </tr>
+   
+  </table>
+   <p><%= f.submit "Register"%></p>
+   <p><%#= link_to "View Users", :controller => "admin", :action => "view_users" %>  </p>
+  <% end %>
+  
+ </div>

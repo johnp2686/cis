@@ -1,0 +1,42 @@
+
+<%= form_for @quotation, :url =>{:controller => "agent", :action => "add_quotation", :method => :post}, :id=>"att_quote",  :html => {:multipart => true}  do |f| %>
+<table widht="100%" border="0">
+ <%= token_tag nil %>
+<input name="authenticity_token" type="hidden" value="token_value">      
+
+<tr>
+<td><label for="att_quote">To</label></td>
+<td><input id="att_quote" name="att_quote[to]" size="34" type="text" /></td>
+</tr>
+<tr>
+<tr>
+<td><label for="att_quote">Subject</label></td>
+<td><input id="att_quote" name="att_quote[subject]" size="34" type="text" /></td>
+</tr>
+<tr>
+<td><label for="att_quote">Message</label></td>
+<td><%= text_area_tag :editor, "", :rows => 10, :cols => 50 ,:name=>'att_quote[message]'%></td>
+</tr>
+<tr>
+<td><label for="att_quote">Quotation</label></td>
+<td><%= f.file_field :quotation %> </td>
+</tr>
+
+<tr>
+<td><input id="send_status" name="commit" type="submit" value="Send" /></td>
+</tr>
+
+
+</table>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+

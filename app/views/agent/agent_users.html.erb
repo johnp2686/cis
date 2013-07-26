@@ -1,0 +1,34 @@
+<%= button_tag  "Add User",:class => "new-user-btn" %>
+<div class="new-user-div" id="new-user-div">
+  <%= form_for(@user, :url => {:controller => "agent",:action => "create_user"},:method => :post,:class =>"new-user-form") do |f| %>
+  <div class="flash-error"></div>
+  
+  <span class="label">User Name</span>
+   <div class="error" id="usr-user-name"><%= f.text_field :user_name %></div><br />
+   <span class="label"> First Name</span>
+   <div class="error" id="usr-first-name"><%= f.text_field :first_name %></div><br />
+   <span class="label">Last Name</span>
+   <div class="error" id="usr-last-name"><%= f.text_field :last_name %></div><br />
+   <span class="label">Email</span>
+   <div class="error" id="usr-email"><%= f.text_field :email %></div><br />
+   <span class="label">Gender</span>
+   <div class="choice_new">
+      <input type="radio" value="Male" name="user[gender]" checked="checked" />Male
+      <input type="radio" value="Female" name="user[gender]" />Female  
+    </div>  
+   <span class="label"> Mobile</span>
+   <div class="error" id="usr-mobile"><%= f.text_field :mobile %></div><br />
+   <span class="label">DOB</span>
+   <div class="error" id="usr-dob"><%= f.text_field :dob, :id=>"datepicker-dob1" %></div><br />
+   <span class="label">Location</span>
+   <div class="error" id="usr-location"><%= f.text_field :location %></div><br />
+   <span class="label">Address</span>
+   <div class="error" id="usr-address"><textarea rows="5" name="user[address]" cols="43"></textarea></div><br />
+   <span class="label">Zip</span>
+   <div class="error" id="usr-zip"><%= f.text_field :zip %></div><br />
+   <%= f.submit "Submit", :id => "new-user-submit" %>
+  <% end %>
+  <%= button_tag "cancel", :class => "close-usr-form"%>
+</div>
+<div id="agent_users"><%= render 'agent_users' %></div>
+

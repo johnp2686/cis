@@ -1,0 +1,81 @@
+<!--<script>
+    $(function() {
+
+        $( "#dob" ).datepicker({dateFormat: "dd/mm/yy"});
+    });
+
+</script> -->
+
+<div align="center">
+  <h3>Create Agent</h3>
+  <table>
+  <%= form_for :user do |f| %>
+   <% if @user.errors.any? %>
+     <div id="errorExplanation">
+        <font color="red"><h2><%= pluralize(@user.errors.count, "error") %> prohibited this post from being saved:</h2></font>
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+           <font color="red"><li><%= msg %></li></font>
+        <% end %>
+        </ul>
+     </div>
+    <% end %>
+    <tr>
+      <td><label>Employee Id</label></td>
+      <td><%= f.text_field :emp_id %></td>
+    </tr>
+   
+    <tr>
+      <td><label>First Name</label></td>
+      <td><%= f.text_field :first_name %></td>
+    </tr>
+    <tr>
+      <td><label>Last Name</label></td>
+      <td><%= f.text_field :last_name %></td>
+    </tr>
+    <tr>
+    
+    <tr>
+      <td><label>Email</label></td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td><label>User Name</label></td>
+      <td><%= f.text_field :user_name %></td>
+    </tr>
+    <tr>
+      <td><label>Date Of Birth</label></td>
+      <td>
+        <%= f.text_field :dob,:id=>"dob" %>
+        <%#= image_tag "datepicker.png" %>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Mobile</label></td>
+      <td><%= f.text_field :mobile %></td>
+    </tr>
+    <tr>
+      <td><label>Gender</label></td>
+      <td>
+        <%= f.radio_button :gender, "Male",:checked => true %>Male
+        <%= f.radio_button :gender, "Female" %>Female    
+      </td>
+    </tr>
+    <tr>
+      <td><label>Location</label></td>
+      <td><%= f.text_field :location %></td>
+    </tr>
+    <tr>
+      <td><label>Zip Code</label></td>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td><label>Address</label></td>
+      <td><%= f.text_area :address , :cols => 43,:rows => 5 %></td>
+    </tr>
+  </table>
+   <p><%= f.submit "Create"%></p>
+   <p><%#= link_to "View Users", :controller => "admin", :action => "view_users" %>  </p>
+  <% end %>
+  
+ </div>

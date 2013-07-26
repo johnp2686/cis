@@ -1,0 +1,24 @@
+<div class="message_div">
+  <div class="subject_message">
+
+     <h1 class="h1_size"><%= @message.subject %></h1>
+  </div>
+  <div class="left">
+    <div class="from_massage">
+      From :<%= @message.from%>
+    </div>
+    <div class="to_message">
+      To :<%= @message.to %>
+    </div>
+  </div>
+  <div class="time_message">
+    <%= duration_of_time(@message.created_at) %>
+  </div>
+  <div class="message_meassage">
+    <%= @message.message %>
+  </div>
+</div>
+<div class="message_btm">
+  <%= link_to "Reply", add_send_status_path(:id => @message.try(:customer)) if current_role == "Agent" %>
+  <%= link_to "Reply", message_customer_reply_path(:id => @message.id) if current_role == "User" %>
+</div>

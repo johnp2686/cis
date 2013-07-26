@@ -1,0 +1,122 @@
+<script>
+  checked = false;
+  function checkedAll()
+  {
+    if (checked == false){checked = true}else{checked = false}
+    for (var i = 0; i < document.getElementById('record').elements.length; i++)
+    {
+    document.getElementById('record').elements[i].checked = checked;
+    }
+  }
+
+  function approve_and_disapprove(title)
+  {
+    var conform=0;
+    var r=0;
+    var i=0;
+    var records = new Array();
+    if(title=="Approve")
+    {
+      <% @users.each do |user|%>
+        if(document.getElementById("record_<%= user.id%>" ).checked == true)
+        {
+          records.push("<%= user.id %>");
+        }
+      <% end %>
+      if(records.length < 1){
+        alert('Select at least one or more records to approve.');
+      }
+      else
+      {
+        window.location ="/admin/mass_approve_and_disapprove_claims?records="+records+"&title="+title
+
+      }
+    }
+    if(title == "Disapprove")
+    {
+      <% @users.each do |user|%>
+      if(document.getElementById("record_<%= user.id%>" ).checked == true)
+      {
+      records.push("<%= user.id %>");
+      }
+      <% end %>
+      if(records.length < 1){
+      alert('Select at least one or more records to disapprove.');
+      }
+    else
+    {
+      window.location ="/admin/mass_approve_and_disapprove_claims?records="+records+"&title="+title
+
+    }
+
+    }
+  }
+
+</script>
+
+
+<h3>Claims</h3>
+<% if !@users.blank? %>
+<% if flash[:success] %>
+  <div class="success">
+    <%= flash[:success] %><% flash.clear %>
+  </div>
+<% end %>
+
+<table class="inner-table">
+  <tr>
+    <th> 
+      <%= sortable_column "Holder Name",:column => "user_name" %>
+    </th>
+    <th> 
+     <%= sortable_column "Policy Number",:column => "policy_number" %>
+    </th>
+    <th> 
+     <%= sortable_column "Date Of Loss",:column => "date_of_loss" %>
+    </th>
+    <th> 
+      <%= sortable_column "Damage Details",:column => "damage_details" %>
+    </th>
+    <th> 
+      <%= sortable_column "Claim Status",:column => "claim_status" %>
+    </th>
+    <th> Approve/Disapprove <%= check_box 'checkedAll', '',:onClick=>"checkedAll()",:checked=> false %>
+    </th>
+    <th>
+      VIEW CONERSATIONS
+    </th>
+
+  </tr>
+  <form id="record">
+  <% @claims.each do |claim| %>
+    <tr>
+      <td><%= claim.customer.try(:user_name) %></td>
+      <td><%= claim.policy_number %></td>
+      <td><%= claim.date_of_loss %></td>
+      <td><%= claim.damage_details %></td>
+      <td><%= claim.claim_status %></td>
+      <td> 
+        <%=  check_box_tag "record_#{claim.id}" %>
+      </td>
+      <td>
+        <%= link_to image_tag('mail_icon.png'), agent_customer_messages_admin_path(:id => claim.id) %>
+      </td>
+      
+    </tr>  
+    
+  <% end %>
+  </table>
+  <div class="pagination" style="clear: both; margin: 10px 0px 0px; float: right;"><%= will_paginate @users %></div>
+</form>
+   <%= button_to "Approve","javascript:void(0)",{:title=>"Approve",:onclick=>"approve_and_disapprove(this.title)"}%>
+
+    <%= button_to "Disapprove","javascript:void(0)",{:title=>"Disapprove",:onclick=>"approve_and_disapprove(this.title)"}%>
+  <% else %>
+    <div> <font color="red" %> No Records Found</font></div>
+  <% end %>
+
+
+
+
+
+

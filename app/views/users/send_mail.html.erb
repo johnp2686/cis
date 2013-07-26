@@ -1,0 +1,30 @@
+
+<h2> Send Email </h2>
+<div>
+ <%= form_tag(send_mail_users_path,:method => :post) do %> 
+ <%= hidden_field_tag 'claim_id', "#{customer_claim_ID}" %>
+ <table>
+    <tbody>
+
+    <tr>
+      <td><label>To</label></td>
+      <td><%= text_field_tag :email,"#{params[:email]}",:size=>35 %></td>
+    </tr>
+    <tr>
+      <td><label>Subject</label></td>
+      <td><%= text_field_tag :subject,"",:size=>35 %></td>
+    </tr>
+
+   
+    <tr>
+      <td><label>Message</label></td>
+      <td><%= text_area_tag :message,"",:rows=>10,:cols=>50 %></td>
+    </tr>
+    
+  </tbody></table>
+
+<%= submit_tag "submit", :class => "create_b" %>
+
+<%= link_to "cancel", {:controller =>"dashboard",:action=>"index"},:class=>"create_b create_b2",:style =>"margin-right:525px" %>
+<% end %>
+</div> 
